@@ -12,6 +12,12 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    
+    <style name="MyWeatherAppTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/weather_color_primary</item>
+        <item name="colorPrimaryDark">@color/weather_color_primary_dark</item>
+        <item name="colorAccent">@color/weather_color_accent</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
