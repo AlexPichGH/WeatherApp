@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,8 +14,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import app.p.alex.weatherapp.fragments.DetailForecastFragment;
+import app.p.alex.weatherapp.fragments.FavoritePlacesFragment;
+import app.p.alex.weatherapp.fragments.HomeFragment;
+import app.p.alex.weatherapp.fragments.SettingsFragment;
+import app.p.alex.weatherapp.fragments.ThreeDaysForecastFragment;
+import app.p.alex.weatherapp.fragments.UserDetailsFragment;
+import app.p.alex.weatherapp.fragments.WeekForecastFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private HomeFragment homeFragment;
+    private FavoritePlacesFragment favoritePlacesFragment;
+    private SettingsFragment settingsFragment;
+    private ThreeDaysForecastFragment threeDaysForecastFragment;
+    private WeekForecastFragment weekForecastFragment;
+    private FragmentManager fragmentManager;
 
     private DrawerLayout drawer;
 
@@ -22,6 +38,8 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initHomeFragment();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -45,6 +63,12 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    private void initHomeFragment() {
+        fragmentManager = getSupportFragmentManager();
+        homeFragment = new HomeFragment();
+        fragmentManager.beginTransaction().add(R.id.fragment_container, homeFragment).commit();
+    }
+
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -54,31 +78,52 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.nav_home:
-
-                return true;
+                if (homeFragment != null) {
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, homeFragment).commit();
+                }
+                break;
             case R.id.nav_tree_days_forecast:
-
-                return true;
+                if (threeDaysForecastFragment != null) {
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, threeDaysForecastFragment).commit();
+                } else {
+                    threeDaysForecastFragment = new ThreeDaysForecastFragment();
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, threeDaysForecastFragment).commit();
+                }
+                break;
             case R.id.nav_week_forecast:
-
-                return true;
+                if (weekForecastFragment != null) {
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, weekForecastFragment).commit();
+                } else {
+                    weekForecastFragment = new WeekForecastFragment();
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, weekForecastFragment).commit();
+                }
+                break;
             case R.id.nav_favorite:
-
-                return true;
+                if (favoritePlacesFragment != null) {
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, favoritePlacesFragment).commit();
+                } else {
+                    favoritePlacesFragment = new FavoritePlacesFragment();
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, favoritePlacesFragment).commit();
+                }
+                break;
             case R.id.nav_settings:
-
-                return true;
+                if (settingsFragment != null) {
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, settingsFragment).commit();
+                } else {
+                    settingsFragment = new SettingsFragment();
+                    fragmentManager.beginTransaction().replace(R.id.fragment_container, settingsFragment).commit();
+                }
+                break;
             case R.id.nav_about_mistake:
-
-                return true;
-            default:
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
+                // будет неявный интент для отправки письма
+                break;
         }
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
