@@ -34,5 +34,4 @@
                 android:title="@string/nav_item_about_mistake" />
         </menu>
     </item>
-
 </menu>
