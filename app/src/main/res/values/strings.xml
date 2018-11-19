@@ -2,8 +2,12 @@
     <string name="app_name">WeatherApp</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="nav_item_home">На главную</string>
+    <string name="nav_item_tree_days_forecast">Погода на 3 дня</string>
+    <string name="nav_item_week_forecast">Погода на неделю</string>
+    <string name="nav_item_favorite">Избранное</string>
+    <string name="nav_item_about_mistake">Сообщить об ошибке</string>
+    <string name="nav_item_settings">Настройки</string>
+    <string name="nav_add">Дополнительно</string>
 </resources>
